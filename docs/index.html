@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K-Capture — 화면 캡처 · 주석 · 공유</title>
+<meta name="description" content="화면 일부를 캡처해 항상 위에 떠 있는 플로팅 창으로 띄우고, 그 위에 도형·텍스트·블러 주석을 다는 macOS 메뉴바 앱.">
+<meta property="og:title" content="K-Capture">
+<meta property="og:description" content="캡처 → 플로팅 → 주석 → 복사/저장. Snipaste 스타일 macOS 캡처 앱.">
+<meta property="og:image" content="https://rex-ingeni.github.io/K-Capture/icon.png">
+<style>
+  :root{
+    --mint:#14B8A6; --mint-lo:#0EA5A0;
+    --bg:#0E0F12; --bg2:#16181D; --card:#1C1F26; --border:#2A2E38;
+    --fg:#EDEFF2; --muted:#9AA3B2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",Segoe UI,Roboto,sans-serif;
+    background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:16px;
+    padding:14px 26px;border-radius:12px;background:var(--mint);color:#04201D;
+    transition:transform .12s ease,background .12s ease;
+  }
+  .btn:hover{background:var(--mint-lo);transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--border)}
+  .btn.ghost:hover{background:var(--card);transform:translateY(-2px)}
+
+  /* hero */
+  header{padding:96px 0 72px;text-align:center;background:
+    radial-gradient(1200px 500px at 50% -10%, rgba(20,184,166,.18), transparent 60%);}
+  .icon{width:120px;height:120px;border-radius:27%;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+  h1{font-size:52px;font-weight:800;letter-spacing:-.02em;margin:22px 0 8px}
+  .tag{font-size:19px;color:var(--muted);max-width:560px;margin:0 auto 34px}
+  .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .ver{margin-top:16px;font-size:13px;color:var(--muted)}
+
+  /* features */
+  section{padding:64px 0}
+  h2{font-size:30px;font-weight:800;text-align:center;margin-bottom:44px;letter-spacing:-.01em}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px}
+  .card .emo{font-size:26px}
+  .card h3{font-size:17px;margin:12px 0 6px}
+  .card p{font-size:14px;color:var(--muted)}
+
+  /* install */
+  .steps{background:var(--bg2);border-radius:20px;padding:40px;border:1px solid var(--border)}
+  ol{list-style:none;counter-reset:s;display:grid;gap:20px}
+  ol li{counter-increment:s;display:flex;gap:16px;align-items:flex-start}
+  ol li::before{
+    content:counter(s);flex:0 0 auto;width:32px;height:32px;border-radius:50%;
+    background:var(--mint);color:#04201D;font-weight:800;display:flex;align-items:center;justify-content:center;
+  }
+  ol li b{display:block}
+  ol li span{color:var(--muted);font-size:14px}
+  code{background:#0A0B0E;border:1px solid var(--border);border-radius:6px;padding:2px 7px;font-size:13px}
+  .note{margin-top:22px;font-size:13px;color:var(--muted);border-left:3px solid var(--mint);padding-left:14px}
+
+  footer{padding:56px 0 72px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--border)}
+  footer a{color:var(--mint)}
+
+  @media(max-width:720px){
+    h1{font-size:38px}.grid{grid-template-columns:1fr}
+    .steps{padding:26px}header{padding:72px 0 56px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img class="icon" src="icon.png" alt="K-Capture 앱 아이콘">
+    <h1>K-Capture</h1>
+    <p class="tag">화면 일부를 캡처해 <b>항상 위에 떠 있는 플로팅 창</b>으로 띄우고,
+       그 위에 도형·텍스트·블러 주석을 다는 macOS 캡처 앱.</p>
+    <div class="cta">
+      <a class="btn" href="https://github.com/rex-ingeni/K-Capture/releases/latest">⬇︎ 다운로드 (macOS)</a>
+      <a class="btn ghost" href="https://github.com/rex-ingeni/K-Capture/releases">모든 버전</a>
+    </div>
+    <div class="ver">Apple Silicon · Intel · macOS 12+ · 무료</div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>무엇을 할 수 있나</h2>
+    <div class="grid">
+      <div class="card"><div class="emo">✂️</div><h3>영역 캡처</h3>
+        <p>단축키로 화면 어디든 드래그해 원하는 영역만 잘라냅니다.</p></div>
+      <div class="card"><div class="emo">📌</div><h3>플로팅 창</h3>
+        <p>캡처를 항상 위에 떠 있는 창으로 띄워 다른 작업과 나란히 봅니다.</p></div>
+      <div class="card"><div class="emo">✏️</div><h3>주석</h3>
+        <p>펜·도형·화살표·텍스트로 캡처 위에 바로 표시를 남깁니다.</p></div>
+      <div class="card"><div class="emo">🌫️</div><h3>블러 · 가리기</h3>
+        <p>민감한 부분을 블러/모자이크로 가려 안전하게 공유합니다.</p></div>
+      <div class="card"><div class="emo">📋</div><h3>복사 · 저장</h3>
+        <p>클립보드로 바로 복사하거나 이미지 파일로 저장합니다.</p></div>
+      <div class="card"><div class="emo">🔄</div><h3>자동 업데이트</h3>
+        <p>새 버전이 나오면 앱 안에서 바로 내려받아 교체합니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>설치 방법</h2>
+    <div class="steps">
+      <ol>
+        <li><div><b>다운로드</b><span>위 버튼으로 최신 <code>.dmg</code> 를 받습니다.</span></div></li>
+        <li><div><b>응용 프로그램으로 이동</b><span>DMG 를 열고 <code>K-Capture</code> 를 <code>Applications</code> 폴더로 드래그합니다.</span></div></li>
+        <li><div><b>처음 실행</b><span>앱을 <b>우클릭 → 열기</b> 로 실행합니다. (미서명 앱이라 최초 1회만 필요)</span></div></li>
+        <li><div><b>메뉴바에서 사용</b><span>상단 메뉴바 아이콘 또는 단축키로 캡처를 시작합니다.</span></div></li>
+      </ol>
+      <p class="note">이후 업데이트는 앱 우상단 버전 버튼(또는 메뉴바 · 업데이트 알림)에서 한 번에 처리됩니다 — 다시 내려받을 필요 없습니다.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>K-Capture · Made by <a href="https://github.com/rex-ingeni">rex-ingeni</a></p>
+    <p style="margin-top:8px"><a href="https://github.com/rex-ingeni/K-Capture">GitHub</a> · <a href="https://github.com/rex-ingeni/K-Capture/releases">릴리스</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

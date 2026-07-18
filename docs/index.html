@@ -112,6 +112,7 @@
     .feature { min-height: 206px; padding: 25px; border-right: 1px solid #31413d; border-bottom: 1px solid #31413d; }
     .feature .feature-icon { display: grid; width: 39px; height: 39px; place-items: center; border-radius: 6px; background: #183c36; color: #7be6d8; }
     .feature i { width: 20px; height: 20px; }
+    .feature .macos-tool-icon { display: block; width: 20px; height: 20px; object-fit: contain; }
     .feature h3 { margin: 18px 0 7px; font-size: 18px; }
     .feature p { margin: 0; color: #b8c5c1; font-size: 14px; }
 
@@ -126,6 +127,7 @@
     .tool-line { display: flex; flex-wrap: wrap; gap: 8px; margin: 19px 0 25px; }
     .tool { display: inline-flex; align-items: center; gap: 6px; padding: 7px 9px; border: 1px solid #cee5df; border-radius: 5px; background: var(--paper); color: var(--ink); font-size: 13px; font-weight: 700; }
     .tool i { width: 15px; height: 15px; color: var(--mint-dark); }
+    .tool .macos-tool-icon { display: block; width: 15px; height: 15px; object-fit: contain; }
     .annotation-panel p { margin: 0; color: var(--muted); font-size: 14px; }
     .annotation-panel .accent { color: var(--mint-dark); font-weight: 750; }
 
@@ -259,7 +261,7 @@
           <article class="feature"><div class="feature-icon"><i data-lucide="scan-text"></i></div><h3>텍스트 선택 OCR</h3><p>화면 속 문장을 인식하고 원하는 범위를 드래그해 텍스트로 복사합니다.</p></article>
           <article class="feature"><div class="feature-icon"><i data-lucide="lasso-select"></i></div><h3>올가미 선택</h3><p>정형화되지 않은 영역도 자유롭게 지정해 남기거나 제거할 수 있습니다.</p></article>
           <article class="feature"><div class="feature-icon"><i data-lucide="wand-sparkles"></i></div><h3>피사체 추출</h3><p>자동으로 피사체를 찾아 배경을 제거하고, 필요한 부분만 투명 PNG로 만듭니다.</p></article>
-          <article class="feature"><div class="feature-icon"><i data-lucide="eye-off"></i></div><h3>블러와 모자이크</h3><p>공유하기 전 민감한 정보나 시선을 분산시키는 부분을 가립니다.</p></article>
+          <article class="feature"><div class="feature-icon"><img class="macos-tool-icon" src="assets/blur-macos.png" alt=""></div><h3>블러와 모자이크</h3><p>공유하기 전 민감한 정보나 시선을 분산시키는 부분을 가립니다.</p></article>
           <article class="feature"><div class="feature-icon"><i data-lucide="star"></i></div><h3>즐겨찾기와 편집</h3><p>필요한 캡처를 즐겨찾기에 모아 다시 열고, 캔버스와 객체를 이어서 편집합니다.</p></article>
           <article class="feature"><div class="feature-icon"><i data-lucide="refresh-cw"></i></div><h3>앱 내 업데이트</h3><p>새 릴리스가 있으면 메뉴바와 메인 창에서 확인하고 앱 안에서 업데이트합니다.</p></article>
         </div>
@@ -286,7 +288,8 @@
             <span class="tool"><i data-lucide="square"></i>도형</span>
             <span class="tool"><i data-lucide="arrow-up-right"></i>화살표</span>
             <span class="tool"><i data-lucide="type"></i>텍스트</span>
-            <span class="tool"><i data-lucide="eye-off"></i>블러</span>
+            <span class="tool"><img class="macos-tool-icon" src="assets/blur-macos.png" alt="">블러</span>
+            <span class="tool"><img class="macos-tool-icon" src="assets/mosaic-macos.png" alt="">모자이크</span>
           </div>
           <p><span class="accent">Cmd+C</span>는 현재 주석을 합성해 복사하고, <span class="accent">Cmd+S</span>는 PNG로 저장합니다. 자주 쓰는 도구와 색상은 키보드로도 바로 바꿀 수 있습니다.</p>
         </aside>

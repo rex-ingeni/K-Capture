@@ -69,6 +69,8 @@
     .button i { width: 18px; height: 18px; }
     .button.primary { color: #05231e; background: var(--mint); }
     .button.primary:hover { background: #2fc6b5; }
+    .button.windows { color: #4a1914; background: #f7e2de; border-color: #ebc4be; }
+    .button.windows:hover { background: #f2cbc4; }
     .button.secondary { border-color: var(--line); color: var(--ink); background: var(--paper); }
     .button.secondary:hover { border-color: var(--mint); background: var(--mint-pale); }
     .hero-note { margin: 16px 0 0; color: var(--muted); font-size: 13px; }
@@ -207,10 +209,11 @@
           <h1 id="hero-title">캡처를<br>바로 쓰는 화면으로.</h1>
           <p class="hero-copy">K-Capture는 화면 일부를 빠르게 캡처하고, 항상 위에 띄운 채 주석·OCR·피사체 추출·복사와 저장까지 이어 가는 작업용 도구입니다.</p>
           <div class="hero-actions">
-            <a class="button primary" href="https://github.com/rex-ingeni/K-Capture/releases/latest"><i data-lucide="download"></i>macOS 다운로드</a>
+            <a class="button primary" href="https://github.com/rex-ingeni/K-Capture/releases/latest"><i data-lucide="apple"></i>macOS 다운로드</a>
+            <a class="button windows" href="https://github.com/rex-ingeni/K-Capture/releases"><i data-lucide="monitor-down"></i>Windows 다운로드</a>
             <a class="button secondary" href="https://github.com/rex-ingeni/K-Capture"><i data-lucide="github"></i>GitHub 보기</a>
           </div>
-          <p class="hero-note">Apple Silicon · Intel · macOS 12 이상 · 무료</p>
+          <p class="hero-note">macOS 12 이상 · Windows 10 20H1 이상 · 무료</p>
         </div>
         <div class="hero-art" aria-label="K-Capture 플로팅 캡처를 상징하는 그래픽">
           <img class="app-icon" src="icon.png" alt="K-Capture 앱 아이콘">
@@ -256,8 +259,8 @@
           <article class="feature"><div class="feature-icon"><i data-lucide="scan-text"></i></div><h3>텍스트 선택 OCR</h3><p>화면 속 문장을 인식하고 원하는 범위를 드래그해 텍스트로 복사합니다.</p></article>
           <article class="feature"><div class="feature-icon"><i data-lucide="lasso-select"></i></div><h3>올가미 선택</h3><p>정형화되지 않은 영역도 자유롭게 지정해 남기거나 제거할 수 있습니다.</p></article>
           <article class="feature"><div class="feature-icon"><i data-lucide="wand-sparkles"></i></div><h3>피사체 추출</h3><p>자동으로 피사체를 찾아 배경을 제거하고, 필요한 부분만 투명 PNG로 만듭니다.</p></article>
-          <article class="feature"><div class="feature-icon"><i data-lucide="blur"></i></div><h3>블러와 모자이크</h3><p>공유하기 전 민감한 정보나 시선을 분산시키는 부분을 가립니다.</p></article>
-          <article class="feature"><div class="feature-icon"><i data-lucide="layers-3"></i></div><h3>담아내기와 편집</h3><p>필요한 캡처를 메인 창에 모아 다시 열고, 캔버스와 객체를 이어서 편집합니다.</p></article>
+          <article class="feature"><div class="feature-icon"><i data-lucide="eye-off"></i></div><h3>블러와 모자이크</h3><p>공유하기 전 민감한 정보나 시선을 분산시키는 부분을 가립니다.</p></article>
+          <article class="feature"><div class="feature-icon"><i data-lucide="star"></i></div><h3>즐겨찾기와 편집</h3><p>필요한 캡처를 즐겨찾기에 모아 다시 열고, 캔버스와 객체를 이어서 편집합니다.</p></article>
           <article class="feature"><div class="feature-icon"><i data-lucide="refresh-cw"></i></div><h3>앱 내 업데이트</h3><p>새 릴리스가 있으면 메뉴바와 메인 창에서 확인하고 앱 안에서 업데이트합니다.</p></article>
         </div>
       </div>
@@ -283,7 +286,7 @@
             <span class="tool"><i data-lucide="square"></i>도형</span>
             <span class="tool"><i data-lucide="arrow-up-right"></i>화살표</span>
             <span class="tool"><i data-lucide="type"></i>텍스트</span>
-            <span class="tool"><i data-lucide="blur"></i>블러</span>
+            <span class="tool"><i data-lucide="eye-off"></i>블러</span>
           </div>
           <p><span class="accent">Cmd+C</span>는 현재 주석을 합성해 복사하고, <span class="accent">Cmd+S</span>는 PNG로 저장합니다. 자주 쓰는 도구와 색상은 키보드로도 바로 바꿀 수 있습니다.</p>
         </aside>
@@ -333,9 +336,10 @@
     <section class="closing">
       <div class="shell">
         <h2>캡처한 화면을, 다음 작업의 가장 가까운 도구로.</h2>
-        <p>최신 버전을 설치하고 메뉴바에서 K-Capture를 시작하세요.</p>
+        <p>사용 중인 운영체제에 맞는 최신 버전을 설치하고 K-Capture를 시작하세요.</p>
         <div class="hero-actions">
-          <a class="button primary" href="https://github.com/rex-ingeni/K-Capture/releases/latest"><i data-lucide="download"></i>최신 버전 다운로드</a>
+          <a class="button primary" href="https://github.com/rex-ingeni/K-Capture/releases/latest"><i data-lucide="apple"></i>macOS 다운로드</a>
+          <a class="button windows" href="https://github.com/rex-ingeni/K-Capture/releases"><i data-lucide="monitor-down"></i>Windows 다운로드</a>
           <a class="button secondary" href="https://github.com/rex-ingeni/K-Capture/releases"><i data-lucide="history"></i>모든 릴리스</a>
         </div>
       </div>

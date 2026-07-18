@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 450" role="img" aria-labelledby="title desc">
+  <title id="title">떠 있는 캡처 창에 표시하고 복사하는 모습</title>
+  <desc id="desc">캡처 창의 편집 도구로 강조 표시를 남긴 후 대화창에 전달하는 화면</desc>
+  <rect width="720" height="450" rx="24" fill="#e7f3f0"/>
+  <g transform="translate(66 58)">
+    <rect width="392" height="234" rx="14" fill="#ffffff" stroke="#233532" stroke-width="2"/>
+    <rect x="22" y="26" width="150" height="16" rx="8" fill="#9ab5af"/>
+    <rect x="22" y="56" width="118" height="11" rx="5.5" fill="#d7e6e2"/>
+    <rect x="22" y="78" width="166" height="11" rx="5.5" fill="#d7e6e2"/>
+    <rect x="22" y="118" width="164" height="80" rx="10" fill="#c2ddd7"/>
+    <rect x="210" y="56" width="144" height="102" rx="10" fill="#d9ece8"/>
+    <rect x="228" y="80" width="108" height="12" rx="6" fill="#a8c9c2"/>
+    <rect x="228" y="104" width="76" height="12" rx="6" fill="#a8c9c2"/>
+    <path d="M205 172c26-18 60-19 91-3" fill="none" stroke="#ef7867" stroke-width="5" stroke-linecap="round"/>
+    <path d="M287 158l16 12-19 4" fill="#ef7867"/>
+    <rect x="16" y="16" width="26" height="26" rx="13" fill="#ffffff" stroke="#c7d8d4"/>
+    <path d="M24 34l2-7 9-9 4 4-9 9z" fill="#233532"/>
+  </g>
+  <g transform="translate(93 314)">
+    <rect width="338" height="46" rx="13" fill="#243633"/>
+    <path d="M23 29l8-13" stroke="#d8ebe6" stroke-width="3" stroke-linecap="round"/>
+    <path d="M47 17h16v13H47z" fill="none" stroke="#d8ebe6" stroke-width="2"/>
+    <path d="M82 29l13-13m0 0h-7m7 0v7" fill="none" stroke="#d8ebe6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="118" y="31" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="20" font-weight="700" fill="#d8ebe6">T</text>
+    <circle cx="158" cy="23" r="7" fill="#ef7867"/><circle cx="178" cy="23" r="7" fill="#e6a13c"/><circle cx="198" cy="23" r="7" fill="#4cb870"/><circle cx="218" cy="23" r="7" fill="#3d8bff"/>
+    <path d="M274 15v16m-8-8h16" stroke="#d8ebe6" stroke-width="2" stroke-linecap="round"/>
+    <rect x="300" y="15" width="18" height="18" rx="3" fill="none" stroke="#d8ebe6" stroke-width="2"/>
+  </g>
+  <path d="M461 205c46 0 61 20 82 40" fill="none" stroke="#17ad9c" stroke-width="3" stroke-linecap="round" stroke-dasharray="7 8"/>
+  <path d="M536 241l12 8-14 5" fill="#17ad9c"/>
+  <g transform="translate(501 166)">
+    <rect width="154" height="132" rx="15" fill="#ffffff" stroke="#c6ddd7" stroke-width="2"/>
+    <rect x="18" y="18" width="92" height="11" rx="5.5" fill="#b5d4ce"/>
+    <rect x="18" y="42" width="118" height="11" rx="5.5" fill="#d8e7e4"/>
+    <rect x="18" y="64" width="82" height="11" rx="5.5" fill="#d8e7e4"/>
+    <rect x="18" y="91" width="118" height="25" rx="7" fill="#14b8a6"/>
+    <text x="77" y="108" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" fill="#05231e">이미지 붙여넣기</text>
+  </g>
+  <g transform="translate(500 320)">
+    <rect width="142" height="32" rx="10" fill="#10201d"/>
+    <path d="M18 10h11v12H18zM22 7h11v12" fill="none" stroke="#dffcf6" stroke-width="1.8"/>
+    <text x="78" y="21" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#dffcf6">Cmd + C</text>
+  </g>
+</svg>

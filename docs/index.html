@@ -4,14 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
-  <title>K-Capture | 캡처를 바로 쓰는 화면으로</title>
-  <meta name="description" content="캡처한 화면을 항상 위에 띄우고, 주석·OCR·올가미·피사체 추출까지 바로 이어 가는 macOS 메뉴바 앱 K-Capture.">
-  <meta property="og:title" content="K-Capture | 캡처를 바로 쓰는 화면으로">
-  <meta property="og:description" content="캡처, 플로팅, 주석, 복사와 저장을 한 흐름으로 처리하는 macOS 메뉴바 앱.">
+  <title>K-Capture | 화면을 캡처하고 바로 설명하세요</title>
+  <meta name="description" content="메신저, 문서, 버그 제보에 필요한 화면을 캡처해 띄워두고 표시한 뒤 바로 복사하거나 저장하는 K-Capture.">
+  <meta property="og:title" content="K-Capture | 화면을 캡처하고 바로 설명하세요">
+  <meta property="og:description" content="필요한 화면을 꺼내 띄워두고, 상대가 볼 곳만 짚어 바로 전달하는 캡처 앱.">
   <meta property="og:image" content="https://rex-ingeni.github.io/K-Capture/icon.png">
   <meta property="og:type" content="website">
   <link rel="icon" href="icon.png">
-  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
   <style>
     :root {
       --ink: #17211f;
@@ -61,12 +60,13 @@
     .hero { padding: 86px 0 66px; overflow: hidden; }
     .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 390px; gap: 62px; align-items: center; }
     .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--mint-dark); font-weight: 800; font-size: 14px; }
-    .eyebrow i { width: 16px; height: 16px; }
+    .app-symbol { display: inline-block; flex: 0 0 auto; width: 1em; height: 1em; background: currentColor; -webkit-mask: var(--symbol) center / contain no-repeat; mask: var(--symbol) center / contain no-repeat; }
+    .eyebrow .app-symbol { width: 16px; height: 16px; }
     h1 { margin: 14px 0 18px; max-width: 690px; font-size: clamp(42px, 6vw, 72px); line-height: 1.05; letter-spacing: 0; }
     .hero-copy { max-width: 580px; margin: 0; color: var(--muted); font-size: 19px; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
     .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 9px; padding: 0 18px; border: 1px solid transparent; border-radius: 7px; font-size: 15px; font-weight: 800; }
-    .button i { width: 18px; height: 18px; }
+    .button .app-symbol { width: 18px; height: 18px; }
     .button.primary { color: #05231e; background: var(--mint); }
     .button.primary:hover { background: #2fc6b5; }
     .button.windows { color: #4a1914; background: #f7e2de; border-color: #ebc4be; }
@@ -82,12 +82,13 @@
     .floating-note span { display: block; margin-top: 3px; color: var(--muted); font-size: 13px; }
     .floating-note .mini-actions { display: flex; gap: 7px; margin-top: 10px; }
     .mini-actions b { display: inline-flex; align-items: center; gap: 4px; padding: 4px 7px; border-radius: 4px; color: var(--mint-dark); background: var(--mint-pale); font-size: 11px; }
+    .mini-actions .app-symbol { width: 12px; height: 12px; }
 
     .quick-facts { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--wash); }
     .facts { display: grid; grid-template-columns: repeat(3, 1fr); }
     .fact { min-height: 94px; display: flex; align-items: center; gap: 13px; padding: 18px 24px; border-right: 1px solid var(--line); }
     .fact:last-child { border-right: 0; }
-    .fact i { flex: 0 0 auto; width: 22px; height: 22px; color: var(--mint-dark); }
+    .fact .app-symbol { width: 22px; height: 22px; color: var(--mint-dark); }
     .fact strong, .fact span { display: block; }
     .fact strong { font-size: 14px; }
     .fact span { margin-top: 2px; color: var(--muted); font-size: 13px; }
@@ -103,7 +104,7 @@
     .workflow-no { color: var(--mint-dark); font-size: 14px; font-weight: 800; }
     .workflow h3 { margin: 0; font-size: 20px; }
     .workflow p { margin: 0; color: var(--muted); font-size: 15px; }
-    .workflow i { width: 21px; height: 21px; color: var(--mint-dark); }
+    .workflow .app-symbol { width: 21px; height: 21px; color: var(--mint-dark); }
 
     .feature-band { background: var(--black); color: #f4fbf9; }
     .feature-band .section-kicker { color: #78e0d2; }
@@ -111,23 +112,21 @@
     .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #31413d; border-left: 1px solid #31413d; }
     .feature { min-height: 206px; padding: 25px; border-right: 1px solid #31413d; border-bottom: 1px solid #31413d; }
     .feature .feature-icon { display: grid; width: 39px; height: 39px; place-items: center; border-radius: 6px; background: #183c36; color: #7be6d8; }
-    .feature i { width: 20px; height: 20px; }
-    .feature .macos-tool-icon { display: block; width: 20px; height: 20px; object-fit: contain; }
+    .feature .app-symbol { width: 20px; height: 20px; }
     .feature h3 { margin: 18px 0 7px; font-size: 18px; }
     .feature p { margin: 0; color: #b8c5c1; font-size: 14px; }
 
     .capture-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 44px; align-items: start; }
     .capability-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
     .capability-list li { display: grid; grid-template-columns: 38px 1fr; gap: 13px; padding: 18px 0; border-bottom: 1px solid var(--line); }
-    .capability-list i { width: 20px; height: 20px; color: var(--coral); }
+    .capability-list .app-symbol { width: 20px; height: 20px; color: var(--coral); }
     .capability-list strong { display: block; font-size: 16px; }
     .capability-list span { display: block; margin-top: 2px; color: var(--muted); font-size: 14px; }
     .annotation-panel { padding: 28px; border: 1px solid var(--line); border-radius: 8px; background: var(--wash); }
     .annotation-panel h3 { margin: 0; font-size: 20px; }
     .tool-line { display: flex; flex-wrap: wrap; gap: 8px; margin: 19px 0 25px; }
     .tool { display: inline-flex; align-items: center; gap: 6px; padding: 7px 9px; border: 1px solid #cee5df; border-radius: 5px; background: var(--paper); color: var(--ink); font-size: 13px; font-weight: 700; }
-    .tool i { width: 15px; height: 15px; color: var(--mint-dark); }
-    .tool .macos-tool-icon { display: block; width: 15px; height: 15px; object-fit: contain; }
+    .tool .app-symbol { width: 15px; height: 15px; color: var(--mint-dark); }
     .annotation-panel p { margin: 0; color: var(--muted); font-size: 14px; }
     .annotation-panel .accent { color: var(--mint-dark); font-weight: 750; }
 
@@ -141,7 +140,7 @@
     .install-steps strong { display: block; font-size: 16px; }
     .install-steps span { display: block; margin-top: 3px; color: #675d42; font-size: 14px; }
     .permission-note { padding: 23px; border: 1px solid #ead294; border-radius: 8px; background: rgba(255, 255, 255, .58); }
-    .permission-note i { width: 26px; height: 26px; color: var(--gold); }
+    .permission-note .app-symbol { width: 26px; height: 26px; color: var(--gold); }
     .permission-note h3 { margin: 12px 0 8px; font-size: 18px; }
     .permission-note p { margin: 0; color: #675d42; font-size: 14px; }
     .permission-note code { display: block; margin-top: 15px; overflow-x: auto; padding: 10px; border-radius: 5px; background: #fff; color: #554415; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
@@ -207,22 +206,22 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="shell hero-grid">
         <div>
-          <div class="eyebrow"><i data-lucide="capture"></i> macOS 메뉴바 캡처 앱</div>
-          <h1 id="hero-title">캡처를<br>바로 쓰는 화면으로.</h1>
-          <p class="hero-copy">K-Capture는 화면 일부를 빠르게 캡처하고, 항상 위에 띄운 채 주석·OCR·피사체 추출·복사와 저장까지 이어 가는 작업용 도구입니다.</p>
+          <div class="eyebrow"><span class="app-symbol" style="--symbol: url('assets/capture-macos.png')" aria-hidden="true"></span>메뉴바에서 바로 시작하는 캡처 앱</div>
+          <h1 id="hero-title">캡처한 화면에,<br>바로 답을 적으세요.</h1>
+          <p class="hero-copy">메신저에 설명을 덧붙이거나, 버그를 공유하거나, 자료를 비교할 때. K-Capture는 필요한 부분을 띄워두고 표시한 다음 바로 복사하거나 저장하게 합니다.</p>
           <div class="hero-actions">
-            <a class="button primary" href="https://github.com/rex-ingeni/K-Capture/releases/latest"><i data-lucide="apple"></i>macOS 다운로드</a>
-            <a class="button windows" href="https://github.com/rex-ingeni/K-Capture/releases"><i data-lucide="monitor-down"></i>Windows 다운로드</a>
-            <a class="button secondary" href="https://github.com/rex-ingeni/K-Capture"><i data-lucide="github"></i>GitHub 보기</a>
+            <a class="button primary" href="https://github.com/rex-ingeni/K-Capture/releases/latest"><span class="app-symbol" style="--symbol: url('assets/save-macos.png')" aria-hidden="true"></span>macOS 다운로드</a>
+            <a class="button windows" href="https://github.com/rex-ingeni/K-Capture/releases"><span class="app-symbol" style="--symbol: url('assets/save-macos.png')" aria-hidden="true"></span>Windows 다운로드</a>
+            <a class="button secondary" href="https://github.com/rex-ingeni/K-Capture"><span class="app-symbol" style="--symbol: url('assets/arrow-macos.png')" aria-hidden="true"></span>GitHub 보기</a>
           </div>
           <p class="hero-note">macOS 12 이상 · Windows 10 20H1 이상 · 무료</p>
         </div>
         <div class="hero-art" aria-label="K-Capture 플로팅 캡처를 상징하는 그래픽">
           <img class="app-icon" src="icon.png" alt="K-Capture 앱 아이콘">
           <div class="floating-note">
-            <strong>필요한 화면은 계속 눈앞에</strong>
-            <span>캡처를 플로팅 창으로 띄우고 바로 표시를 남깁니다.</span>
-            <div class="mini-actions"><b><i data-lucide="pen-line"></i>주석</b><b><i data-lucide="copy"></i>복사</b></div>
+            <strong>보면서 바로 표시하세요</strong>
+            <span>캡처 창을 띄워둔 채 필요한 곳을 짚고 복사합니다.</span>
+            <div class="mini-actions"><b><span class="app-symbol" style="--symbol: url('assets/pencil-macos.png')" aria-hidden="true"></span>주석</b><b><span class="app-symbol" style="--symbol: url('assets/copy-macos.png')" aria-hidden="true"></span>복사</b></div>
           </div>
         </div>
       </div>
@@ -230,23 +229,23 @@
 
     <div class="quick-facts">
       <div class="shell facts">
-        <div class="fact"><i data-lucide="command"></i><div><strong>전역 단축키로 시작</strong><span>작업 흐름을 끊지 않고 영역 선택</span></div></div>
-        <div class="fact"><i data-lucide="panel-top"></i><div><strong>항상 위 플로팅</strong><span>참조 화면을 다른 앱 위에 유지</span></div></div>
-        <div class="fact"><i data-lucide="sparkles"></i><div><strong>캡처 후 바로 편집</strong><span>주석과 추출을 한 캔버스에서 처리</span></div></div>
+        <div class="fact"><span class="app-symbol" style="--symbol: url('assets/capture-macos.png')" aria-hidden="true"></span><div><strong>필요한 장면만 바로 캡처</strong><span>단축키를 누르고 화면의 필요한 부분만 끌어 선택</span></div></div>
+        <div class="fact"><span class="app-symbol" style="--symbol: url('assets/floating-macos.png')" aria-hidden="true"></span><div><strong>참조를 옆에 둔 채 작업</strong><span>캡처를 띄워두고 다른 앱을 계속 보며 비교</span></div></div>
+        <div class="fact"><span class="app-symbol" style="--symbol: url('assets/pencil-macos.png')" aria-hidden="true"></span><div><strong>상대가 볼 곳만 표시</strong><span>긴 설명 대신 선, 도형, 짧은 메모로 핵심 전달</span></div></div>
       </div>
     </div>
 
     <section id="workflow">
       <div class="shell">
         <div class="section-top">
-          <div><p class="section-kicker">A focused workflow</p><h2>캡처하고, 정리하고, 전달합니다.</h2></div>
-          <p class="section-intro">짧은 참고부터 공유용 이미지까지, 필요한 동작만 이어지는 흐름입니다.</p>
+          <div><p class="section-kicker">A focused workflow</p><h2>보여주고 싶은 화면을,<br>설명까지 한 번에.</h2></div>
+          <p class="section-intro">채팅, 문서, 버그 제보를 오가며 캡처를 다시 찾을 필요가 없습니다.</p>
         </div>
         <div class="workflow">
-          <div class="workflow-row"><span class="workflow-no">01</span><h3>영역을 고릅니다</h3><p>전역 단축키 또는 메뉴바에서 시작한 뒤, 필요한 화면만 드래그해 캡처합니다.</p><i data-lucide="arrow-up-right"></i></div>
-          <div class="workflow-row"><span class="workflow-no">02</span><h3>눈앞에 고정합니다</h3><p>캡처는 항상 위에 떠 있는 창으로 열립니다. 여러 장을 띄우고 비교하거나, 확대와 팬으로 세부를 살펴볼 수 있습니다.</p><i data-lucide="arrow-up-right"></i></div>
-          <div class="workflow-row"><span class="workflow-no">03</span><h3>의도를 표시합니다</h3><p>펜, 형광펜, 도형, 화살표, 텍스트와 블러·모자이크로 설명에 필요한 부분만 남깁니다.</p><i data-lucide="arrow-up-right"></i></div>
-          <div class="workflow-row"><span class="workflow-no">04</span><h3>바로 사용합니다</h3><p>클립보드로 복사하거나 PNG로 저장하고, 필요하면 Finder나 다른 앱으로 파일을 바로 끌어냅니다.</p><i data-lucide="arrow-up-right"></i></div>
+          <div class="workflow-row"><span class="workflow-no">01</span><h3>필요한 장면만 잡습니다</h3><p>단축키나 메뉴바에서 시작해, 지금 설명해야 할 부분만 빠르게 선택합니다.</p><span class="app-symbol" style="--symbol: url('assets/arrow-macos.png')" aria-hidden="true"></span></div>
+          <div class="workflow-row"><span class="workflow-no">02</span><h3>옆에 띄워두고 봅니다</h3><p>캡처를 항상 위에 두고 원래 작업 화면과 나란히 비교하거나 작은 글자까지 살펴봅니다.</p><span class="app-symbol" style="--symbol: url('assets/arrow-macos.png')" aria-hidden="true"></span></div>
+          <div class="workflow-row"><span class="workflow-no">03</span><h3>상대가 볼 곳을 짚습니다</h3><p>펜, 도형, 화살표, 텍스트로 핵심을 짚고, 보여주면 안 되는 정보는 블러나 모자이크로 가립니다.</p><span class="app-symbol" style="--symbol: url('assets/arrow-macos.png')" aria-hidden="true"></span></div>
+          <div class="workflow-row"><span class="workflow-no">04</span><h3>바로 붙여 넣거나 보냅니다</h3><p>완성한 화면을 대화창에 복사하고, 파일이 필요할 때만 PNG로 저장해 전달합니다.</p><span class="app-symbol" style="--symbol: url('assets/arrow-macos.png')" aria-hidden="true"></span></div>
         </div>
       </div>
     </section>
@@ -254,16 +253,16 @@
     <section id="features" class="feature-band">
       <div class="shell">
         <div class="section-top">
-          <div><p class="section-kicker">More than a screenshot</p><h2>필요한 후처리를 캡처 위에서.</h2></div>
-          <p class="section-intro">다른 앱을 열기 전에, 화면에서 바로 해결할 수 있는 기능을 담았습니다.</p>
+          <div><p class="section-kicker">More than a screenshot</p><h2>캡처 한 장으로,<br>설명이 끝나게.</h2></div>
+          <p class="section-intro">말로 길게 적기 어려운 화면 상황을, 필요한 도구로 바로 정리합니다.</p>
         </div>
         <div class="feature-grid">
-          <article class="feature"><div class="feature-icon"><i data-lucide="scan-text"></i></div><h3>텍스트 선택 OCR</h3><p>화면 속 문장을 인식하고 원하는 범위를 드래그해 텍스트로 복사합니다.</p></article>
-          <article class="feature"><div class="feature-icon"><i data-lucide="lasso-select"></i></div><h3>올가미 선택</h3><p>정형화되지 않은 영역도 자유롭게 지정해 남기거나 제거할 수 있습니다.</p></article>
-          <article class="feature"><div class="feature-icon"><i data-lucide="wand-sparkles"></i></div><h3>피사체 추출</h3><p>자동으로 피사체를 찾아 배경을 제거하고, 필요한 부분만 투명 PNG로 만듭니다.</p></article>
-          <article class="feature"><div class="feature-icon"><img class="macos-tool-icon" src="assets/blur-macos.png" alt=""></div><h3>블러와 모자이크</h3><p>공유하기 전 민감한 정보나 시선을 분산시키는 부분을 가립니다.</p></article>
-          <article class="feature"><div class="feature-icon"><i data-lucide="star"></i></div><h3>즐겨찾기와 편집</h3><p>필요한 캡처를 즐겨찾기에 모아 다시 열고, 캔버스와 객체를 이어서 편집합니다.</p></article>
-          <article class="feature"><div class="feature-icon"><i data-lucide="refresh-cw"></i></div><h3>앱 내 업데이트</h3><p>새 릴리스가 있으면 메뉴바와 메인 창에서 확인하고 앱 안에서 업데이트합니다.</p></article>
+          <article class="feature"><div class="feature-icon"><span class="app-symbol" style="--symbol: url('assets/ocr-macos.png')" aria-hidden="true"></span></div><h3>화면 속 문장을 다시 쓰지 마세요</h3><p>캡처에 보이는 문장을 선택해 필요한 부분만 텍스트로 가져옵니다.</p></article>
+          <article class="feature"><div class="feature-icon"><span class="app-symbol" style="--symbol: url('assets/lasso-macos.png')" aria-hidden="true"></span></div><h3>복잡한 모양도 필요한 부분만</h3><p>네모로 자르기 애매한 영역도 손으로 따라 선택해 남기거나 덜어냅니다.</p></article>
+          <article class="feature"><div class="feature-icon"><span class="app-symbol" style="--symbol: url('assets/subject-macos.png')" aria-hidden="true"></span></div><h3>상품이나 인물만 따로 보내세요</h3><p>피사체를 찾아 배경을 빼고, 필요한 대상만 투명 PNG로 만듭니다.</p></article>
+          <article class="feature"><div class="feature-icon"><span class="app-symbol" style="--symbol: url('assets/blur-macos.png')" aria-hidden="true"></span></div><h3>가릴 곳은 남기지 마세요</h3><p>이름, 알림, 개인 정보처럼 공유하면 안 되는 부분을 블러나 모자이크로 가립니다.</p></article>
+          <article class="feature"><div class="feature-icon"><span class="app-symbol" style="--symbol: url('assets/favorite-macos.png')" aria-hidden="true"></span></div><h3>나중에 다시 볼 캡처를 모아두세요</h3><p>자주 참고하는 화면은 즐겨찾기에 남겨두고 필요할 때 다시 열어 이어서 편집합니다.</p></article>
+          <article class="feature"><div class="feature-icon"><span class="app-symbol" style="--symbol: url('assets/update-macos.png')" aria-hidden="true"></span></div><h3>새 버전을 놓치지 마세요</h3><p>업데이트가 준비되면 앱 안에서 알려주므로, 새 기능을 찾으러 따로 돌아다닐 필요가 없습니다.</p></article>
         </div>
       </div>
     </section>
@@ -272,26 +271,26 @@
       <div class="shell capture-layout">
         <div>
           <p class="section-kicker">Annotate with intent</p>
-          <h2>표시만 남기고, 해상도는 지킵니다.</h2>
-          <p class="section-intro" style="margin-top: 15px; max-width: 560px;">설명에 필요한 도구를 빠르게 바꾸고, 결과는 원본 밀도 기준으로 복사하거나 저장합니다.</p>
+          <h2>설명은 짧게,<br>화면 위에서 바로.</h2>
+          <p class="section-intro" style="margin-top: 15px; max-width: 560px;">긴 문장 대신, 보이는 곳에 선 하나와 짧은 메모를 남겨 상대가 바로 이해하게 합니다.</p>
           <ul class="capability-list">
-            <li><i data-lucide="highlighter"></i><div><strong>주석 도구</strong><span>펜·형광펜·사각형·원·화살표·텍스트와 색상·굵기를 바로 조절합니다.</span></div></li>
-            <li><i data-lucide="move"></i><div><strong>보기 제어</strong><span>줌과 팬, 좌우·상하 반전, 창 투명도로 참조하기 좋은 상태를 만듭니다.</span></div></li>
-            <li><i data-lucide="file-output"></i><div><strong>공유 방식 선택</strong><span>복사, PNG 저장, Shift+드래그 파일 전달 중 현재 작업에 맞는 방식을 고릅니다.</span></div></li>
+            <li><span class="app-symbol" style="--symbol: url('assets/highlighter-macos.png')" aria-hidden="true"></span><div><strong>한눈에 짚어주기</strong><span>펜, 형광펜, 도형, 화살표, 텍스트를 골라 상대가 볼 위치를 분명하게 표시합니다.</span></div></li>
+            <li><span class="app-symbol" style="--symbol: url('assets/move-macos.png')" aria-hidden="true"></span><div><strong>살펴보기 편하게</strong><span>작은 글자나 비교할 부분은 확대해 보고, 캡처 창은 필요한 곳으로 옮겨둡니다.</span></div></li>
+            <li><span class="app-symbol" style="--symbol: url('assets/save-macos.png')" aria-hidden="true"></span><div><strong>보낼 방법 고르기</strong><span>대화창에는 바로 붙여 넣고, 파일이 필요한 경우에는 PNG로 저장하거나 끌어 전달합니다.</span></div></li>
           </ul>
         </div>
         <aside class="annotation-panel" aria-label="주석 도구 예시">
           <h3>주석 도구</h3>
           <div class="tool-line">
-            <span class="tool"><i data-lucide="pen-line"></i>펜</span>
-            <span class="tool"><i data-lucide="highlighter"></i>형광펜</span>
-            <span class="tool"><i data-lucide="square"></i>도형</span>
-            <span class="tool"><i data-lucide="arrow-up-right"></i>화살표</span>
-            <span class="tool"><i data-lucide="type"></i>텍스트</span>
-            <span class="tool"><img class="macos-tool-icon" src="assets/blur-macos.png" alt="">블러</span>
-            <span class="tool"><img class="macos-tool-icon" src="assets/mosaic-macos.png" alt="">모자이크</span>
+            <span class="tool"><span class="app-symbol" style="--symbol: url('assets/pencil-macos.png')" aria-hidden="true"></span>펜</span>
+            <span class="tool"><span class="app-symbol" style="--symbol: url('assets/highlighter-macos.png')" aria-hidden="true"></span>형광펜</span>
+            <span class="tool"><span class="app-symbol" style="--symbol: url('assets/rectangle-macos.png')" aria-hidden="true"></span>도형</span>
+            <span class="tool"><span class="app-symbol" style="--symbol: url('assets/arrow-macos.png')" aria-hidden="true"></span>화살표</span>
+            <span class="tool"><span class="app-symbol" style="--symbol: url('assets/text-macos.png')" aria-hidden="true"></span>텍스트</span>
+            <span class="tool"><span class="app-symbol" style="--symbol: url('assets/blur-macos.png')" aria-hidden="true"></span>블러</span>
+            <span class="tool"><span class="app-symbol" style="--symbol: url('assets/mosaic-macos.png')" aria-hidden="true"></span>모자이크</span>
           </div>
-          <p><span class="accent">Cmd+C</span>는 현재 주석을 합성해 복사하고, <span class="accent">Cmd+S</span>는 PNG로 저장합니다. 자주 쓰는 도구와 색상은 키보드로도 바로 바꿀 수 있습니다.</p>
+          <p><span class="accent">Cmd+C</span>로 대화창에 바로 붙여 넣고, <span class="accent">Cmd+S</span>로 PNG를 남깁니다. 자주 쓰는 도구와 색상은 키보드로 빠르게 바꿀 수 있습니다.</p>
         </aside>
       </div>
     </section>
@@ -300,7 +299,7 @@
       <div class="shell install-grid">
         <div>
           <p class="section-kicker">Get started</p>
-          <h2>설치는 한 번, 캡처는 언제든.</h2>
+          <h2>설치하고,<br>다음 캡처부터 바로.</h2>
           <ol class="install-steps">
             <li><strong>최신 DMG를 다운로드합니다</strong><span>릴리스 페이지에서 최신 <code>.dmg</code> 파일을 받습니다.</span></li>
             <li><strong>Applications 폴더로 옮깁니다</strong><span>DMG를 열고 K-Capture를 Applications 폴더로 드래그합니다.</span></li>
@@ -309,9 +308,9 @@
           </ol>
         </div>
         <aside class="permission-note">
-          <i data-lucide="shield-check"></i>
-          <h3>처음 실행 안내</h3>
-          <p>미서명 앱 경고가 보이면 ‘열기’를 한 번 선택하세요. “손상되어 열 수 없습니다”라는 메시지가 나오는 경우에만 아래 명령을 사용합니다.</p>
+          <span class="app-symbol" style="--symbol: url('assets/checkmark-macos.png')" aria-hidden="true"></span>
+          <h3>처음 한 번만 확인하세요</h3>
+          <p>미서명 앱 경고가 보이면 ‘열기’를 한 번 선택하면 됩니다. “손상되어 열 수 없습니다”라는 메시지가 나오는 경우에만 아래 명령을 사용하세요.</p>
           <code>xattr -cr /Applications/K-Capture.app</code>
         </aside>
       </div>
@@ -320,8 +319,8 @@
     <section id="shortcuts">
       <div class="shell">
         <div class="section-top">
-          <div><p class="section-kicker">Keyboard first</p><h2>손이 멈추지 않는 단축키.</h2></div>
-          <p class="section-intro">기본값은 설정에서 바꿀 수 있습니다.</p>
+          <div><p class="section-kicker">Keyboard first</p><h2>캡처하다 흐름이<br>끊기지 않게.</h2></div>
+          <p class="section-intro">자주 쓰는 키는 내 손에 맞게 바꿀 수 있습니다.</p>
         </div>
         <div class="shortcuts">
           <div class="shortcut"><span>캡처 시작</span><kbd>Shift + Cmd + 2</kbd></div>
@@ -338,12 +337,12 @@
 
     <section class="closing">
       <div class="shell">
-        <h2>캡처한 화면을, 다음 작업의 가장 가까운 도구로.</h2>
-        <p>사용 중인 운영체제에 맞는 최신 버전을 설치하고 K-Capture를 시작하세요.</p>
+        <h2>설명할 화면이 생기면,<br>바로 꺼내 쓰세요.</h2>
+        <p>캡처한 장면을 띄워두고, 필요한 부분만 짚어 바로 전달해 보세요.</p>
         <div class="hero-actions">
-          <a class="button primary" href="https://github.com/rex-ingeni/K-Capture/releases/latest"><i data-lucide="apple"></i>macOS 다운로드</a>
-          <a class="button windows" href="https://github.com/rex-ingeni/K-Capture/releases"><i data-lucide="monitor-down"></i>Windows 다운로드</a>
-          <a class="button secondary" href="https://github.com/rex-ingeni/K-Capture/releases"><i data-lucide="history"></i>모든 릴리스</a>
+          <a class="button primary" href="https://github.com/rex-ingeni/K-Capture/releases/latest"><span class="app-symbol" style="--symbol: url('assets/save-macos.png')" aria-hidden="true"></span>macOS 다운로드</a>
+          <a class="button windows" href="https://github.com/rex-ingeni/K-Capture/releases"><span class="app-symbol" style="--symbol: url('assets/save-macos.png')" aria-hidden="true"></span>Windows 다운로드</a>
+          <a class="button secondary" href="https://github.com/rex-ingeni/K-Capture/releases"><span class="app-symbol" style="--symbol: url('assets/update-macos.png')" aria-hidden="true"></span>모든 릴리스</a>
         </div>
       </div>
     </section>
@@ -351,10 +350,9 @@
 
   <footer>
     <div class="shell footer-row">
-      <span>K-Capture · macOS capture and annotation</span>
+      <span>K-Capture · 화면을 바로 설명하는 캡처 도구</span>
       <div class="footer-links"><a href="https://github.com/rex-ingeni/K-Capture">GitHub</a><a href="https://github.com/rex-ingeni/K-Capture/releases">릴리스</a><a href="https://github.com/rex-ingeni">rex-ingeni</a></div>
     </div>
   </footer>
-  <script>window.addEventListener("DOMContentLoaded", () => window.lucide?.createIcons());</script>
 </body>
 </html>

@@ -106,6 +106,19 @@
     .workflow p { margin: 0; color: var(--muted); font-size: 15px; }
     .workflow .app-symbol { width: 21px; height: 21px; color: var(--mint-dark); }
 
+    .usage-showcase { background: var(--wash); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .usage-steps { border-top: 1px solid var(--line); }
+    .usage-step { display: grid; grid-template-columns: minmax(0, .88fr) minmax(360px, 1.12fr); gap: 58px; align-items: center; padding: 42px 0; border-bottom: 1px solid var(--line); }
+    .usage-step.reverse { grid-template-columns: minmax(360px, 1.12fr) minmax(0, .88fr); }
+    .usage-step.reverse .usage-copy { order: 2; }
+    .usage-number { display: block; margin-bottom: 10px; color: var(--mint-dark); font-size: 13px; font-weight: 800; }
+    .usage-step h3 { margin: 0; font-size: 25px; line-height: 1.25; }
+    .usage-step p { margin: 12px 0 0; color: var(--muted); font-size: 16px; }
+    .usage-hint { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; color: var(--mint-dark); font-size: 13px; font-weight: 800; }
+    .usage-hint .app-symbol { width: 16px; height: 16px; }
+    .usage-figure { margin: 0; overflow: hidden; border: 1px solid #c8ddd8; border-radius: 8px; background: #e7f3f0; box-shadow: 0 14px 28px rgba(23, 57, 50, .09); }
+    .usage-figure img { display: block; width: 100%; height: auto; }
+
     .feature-band { background: var(--black); color: #f4fbf9; }
     .feature-band .section-kicker { color: #78e0d2; }
     .feature-band .section-intro { color: #b8c5c1; }
@@ -172,6 +185,8 @@
       .section-intro { margin-top: 14px; }
       .workflow-row { grid-template-columns: 52px 1fr 24px; gap: 12px; padding: 22px 0; }
       .workflow p { grid-column: 2 / 4; }
+      .usage-step, .usage-step.reverse { grid-template-columns: 1fr; gap: 22px; padding: 30px 0; }
+      .usage-step.reverse .usage-copy { order: 0; }
     }
     @media (max-width: 540px) {
       .shell { width: min(100% - 30px, 1120px); }
@@ -193,7 +208,7 @@
     <nav class="nav shell" aria-label="주요 메뉴">
       <a class="brand" href="#top"><img src="icon.png" alt="">K-Capture</a>
       <div class="nav-links">
-        <a href="#workflow">흐름</a>
+        <a href="#usage">사용 모습</a>
         <a href="#features">기능</a>
         <a href="#install">설치</a>
         <a href="#shortcuts">단축키</a>
@@ -246,6 +261,44 @@
           <div class="workflow-row"><span class="workflow-no">02</span><h3>옆에 띄워두고 봅니다</h3><p>캡처를 항상 위에 두고 원래 작업 화면과 나란히 비교하거나 작은 글자까지 살펴봅니다.</p><span class="app-symbol" style="--symbol: url('assets/arrow-macos.png')" aria-hidden="true"></span></div>
           <div class="workflow-row"><span class="workflow-no">03</span><h3>상대가 볼 곳을 짚습니다</h3><p>펜, 도형, 화살표, 텍스트로 핵심을 짚고, 보여주면 안 되는 정보는 블러나 모자이크로 가립니다.</p><span class="app-symbol" style="--symbol: url('assets/arrow-macos.png')" aria-hidden="true"></span></div>
           <div class="workflow-row"><span class="workflow-no">04</span><h3>바로 붙여 넣거나 보냅니다</h3><p>완성한 화면을 대화창에 복사하고, 파일이 필요할 때만 PNG로 저장해 전달합니다.</p><span class="app-symbol" style="--symbol: url('assets/arrow-macos.png')" aria-hidden="true"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="usage" class="usage-showcase" aria-labelledby="usage-title">
+      <div class="shell">
+        <div class="section-top">
+          <div><p class="section-kicker">See it in use</p><h2 id="usage-title">캡처한 뒤에는<br>이렇게 씁니다.</h2></div>
+          <p class="section-intro">설명해야 할 화면을 찾고, 표시하고, 대화창에 붙여 넣는 실제 흐름입니다.</p>
+        </div>
+        <div class="usage-steps">
+          <article class="usage-step">
+            <div class="usage-copy">
+              <span class="usage-number">01 · 시작</span>
+              <h3>설명할 장면이 보이면,<br>바로 꺼냅니다.</h3>
+              <p>메뉴바에서 캡처를 누르거나 단축키를 누르면 됩니다. 보고 있던 작업을 닫거나 다른 앱으로 옮길 필요가 없습니다.</p>
+              <span class="usage-hint"><span class="app-symbol" style="--symbol: url('assets/capture-macos.png')" aria-hidden="true"></span>메뉴바 또는 Shift + Cmd + 2</span>
+            </div>
+            <figure class="usage-figure"><img src="assets/usage-capture-start.svg" alt="메뉴바의 K-Capture 아이콘을 눌러 캡처하기를 선택하는 화면"></figure>
+          </article>
+          <article class="usage-step reverse">
+            <figure class="usage-figure"><img src="assets/usage-select-area.svg" alt="어두워진 화면 위에서 필요한 부분을 드래그해 선택하는 화면"></figure>
+            <div class="usage-copy">
+              <span class="usage-number">02 · 선택</span>
+              <h3>필요한 부분만<br>드래그해 잡습니다.</h3>
+              <p>공유할 내용이 있는 곳만 선택하면 캡처가 준비됩니다. 실수했다면 Esc로 취소하고 바로 다시 고를 수 있습니다.</p>
+              <span class="usage-hint"><span class="app-symbol" style="--symbol: url('assets/move-macos.png')" aria-hidden="true"></span>영역을 끌어 선택</span>
+            </div>
+          </article>
+          <article class="usage-step">
+            <div class="usage-copy">
+              <span class="usage-number">03 · 표시와 전달</span>
+              <h3>창을 띄워두고<br>볼 곳만 짚어 보냅니다.</h3>
+              <p>캡처 창은 다른 창 위에 남아 있습니다. 화살표나 메모로 핵심을 짚고 Cmd+C를 누르면 대화창에 바로 붙여 넣을 수 있습니다.</p>
+              <span class="usage-hint"><span class="app-symbol" style="--symbol: url('assets/copy-macos.png')" aria-hidden="true"></span>표시 후 Cmd + C로 복사</span>
+            </div>
+            <figure class="usage-figure"><img src="assets/usage-annotate-send.svg" alt="떠 있는 캡처 창에 화살표를 그린 뒤 대화창에 이미지를 붙여 넣는 화면"></figure>
+          </article>
         </div>
       </div>
     </section>

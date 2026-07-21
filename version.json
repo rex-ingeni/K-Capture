@@ -1,8 +1,8 @@
 {
-  "version": "0.2.2",
-  "url": "https://github.com/rex-ingeni/K-Capture/releases/download/v0.2.2/K-Capture-0.2.2.app.zip",
-  "dmg": "https://github.com/rex-ingeni/K-Capture/releases/download/v0.2.2/K-Capture-0.2.2.dmg",
-  "size": 2051670,
-  "sha256": "7e46b8c5cd29715a786dafd179ad7be3e4c15d6b0bcfc7b4868d673f4f750b12",
-  "notes": "K-Capture 0.2.2"
+  "version": "0.2.3",
+  "url": "https://github.com/rex-ingeni/K-Capture/releases/download/v0.2.3/K-Capture-0.2.3.app.zip",
+  "dmg": "https://github.com/rex-ingeni/K-Capture/releases/download/v0.2.3/K-Capture-0.2.3.dmg",
+  "size": 2295971,
+  "sha256": "",
+  "notes": "K-Capture 0.2.3"
 }

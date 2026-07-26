@@ -1,0 +1,8 @@
+{
+  "version": "0.2.0",
+  "url": "https://github.com/rex-ingeni/K-Capture/releases/download/windows-v0.2.0/KCaptureSetup-0.2.0.msi",
+  "size": 81063936,
+  "sha256": "fb9ad49d640111329f0557125eaca92a043864539d9a1219ace1fe2c82df78a3",
+  "notes": "K-Capture for Windows 0.2.0",
+  "mandatory": false
+}

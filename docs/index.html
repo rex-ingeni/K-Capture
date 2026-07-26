@@ -225,8 +225,8 @@
           <h1 id="hero-title">캡처한 화면에,<br>바로 답을 적으세요.</h1>
           <p class="hero-copy">메신저에 설명을 덧붙이거나, 버그를 공유하거나, 자료를 비교할 때. K-Capture는 필요한 부분을 띄워두고 표시한 다음 바로 복사하거나 저장하게 합니다.</p>
           <div class="hero-actions">
-            <a class="button primary" href="https://github.com/rex-ingeni/K-Capture/releases/latest"><span class="app-symbol" style="--symbol: url('assets/save-macos.png')" aria-hidden="true"></span>macOS 다운로드</a>
-            <a class="button windows" href="https://github.com/rex-ingeni/K-Capture/releases"><span class="app-symbol" style="--symbol: url('assets/save-macos.png')" aria-hidden="true"></span>Windows 다운로드</a>
+            <a class="button primary" data-macos-download href="https://github.com/rex-ingeni/K-Capture/releases/latest"><span class="app-symbol" style="--symbol: url('assets/save-macos.png')" aria-hidden="true"></span>macOS 다운로드</a>
+            <a class="button windows" data-windows-download href="https://github.com/rex-ingeni/K-Capture/releases"><span class="app-symbol" style="--symbol: url('assets/save-macos.png')" aria-hidden="true"></span>Windows 다운로드</a>
             <a class="button secondary" href="https://github.com/rex-ingeni/K-Capture"><span class="app-symbol" style="--symbol: url('assets/arrow-macos.png')" aria-hidden="true"></span>GitHub 보기</a>
           </div>
           <p class="hero-note">macOS 12 이상 · Windows 10 20H1 이상 · 무료</p>
@@ -393,8 +393,8 @@
         <h2>설명할 화면이 생기면,<br>바로 꺼내 쓰세요.</h2>
         <p>캡처한 장면을 띄워두고, 필요한 부분만 짚어 바로 전달해 보세요.</p>
         <div class="hero-actions">
-          <a class="button primary" href="https://github.com/rex-ingeni/K-Capture/releases/latest"><span class="app-symbol" style="--symbol: url('assets/save-macos.png')" aria-hidden="true"></span>macOS 다운로드</a>
-          <a class="button windows" href="https://github.com/rex-ingeni/K-Capture/releases"><span class="app-symbol" style="--symbol: url('assets/save-macos.png')" aria-hidden="true"></span>Windows 다운로드</a>
+          <a class="button primary" data-macos-download href="https://github.com/rex-ingeni/K-Capture/releases/latest"><span class="app-symbol" style="--symbol: url('assets/save-macos.png')" aria-hidden="true"></span>macOS 다운로드</a>
+          <a class="button windows" data-windows-download href="https://github.com/rex-ingeni/K-Capture/releases"><span class="app-symbol" style="--symbol: url('assets/save-macos.png')" aria-hidden="true"></span>Windows 다운로드</a>
           <a class="button secondary" href="https://github.com/rex-ingeni/K-Capture/releases"><span class="app-symbol" style="--symbol: url('assets/update-macos.png')" aria-hidden="true"></span>모든 릴리스</a>
         </div>
       </div>
@@ -407,5 +407,51 @@
       <div class="footer-links"><a href="https://github.com/rex-ingeni/K-Capture">GitHub</a><a href="https://github.com/rex-ingeni/K-Capture/releases">릴리스</a><a href="https://github.com/rex-ingeni">rex-ingeni</a></div>
     </div>
   </footer>
+  <script>
+    (() => {
+      const releasePath = "/rex-ingeni/K-Capture/releases/download/";
+
+      function updateDownloads(selector, manifestUri, assetKey, tagPrefix, extension, label) {
+        fetch(manifestUri, { cache: "no-store" })
+          .then(response => response.ok ? response.json() : Promise.reject())
+          .then(manifest => {
+            const version = manifest.version;
+            const installer = new URL(manifest[assetKey]);
+            const expectedPath = releasePath + tagPrefix + version + "/";
+            const isTrustedRelease = version
+              && installer.protocol === "https:"
+              && installer.host === "github.com"
+              && installer.pathname.startsWith(expectedPath)
+              && installer.pathname.endsWith(extension);
+
+            if (!isTrustedRelease) {
+              return;
+            }
+
+            document.querySelectorAll(selector).forEach(link => {
+              link.href = installer.href;
+              link.setAttribute("aria-label", label + " v" + version + " 다운로드");
+              link.lastChild.textContent = label + " v" + version + " 다운로드";
+            });
+          })
+          .catch(() => {});
+      }
+
+      updateDownloads(
+        "[data-macos-download]",
+        "https://raw.githubusercontent.com/rex-ingeni/K-Capture/main/version.json",
+        "dmg",
+        "v",
+        ".dmg",
+        "macOS");
+      updateDownloads(
+        "[data-windows-download]",
+        "https://raw.githubusercontent.com/rex-ingeni/K-Capture/main/windows-version.json",
+        "url",
+        "windows-v",
+        ".msi",
+        "Windows");
+    })();
+  </script>
 </body>
 </html>

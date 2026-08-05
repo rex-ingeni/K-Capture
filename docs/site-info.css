@@ -1,0 +1,76 @@
+:root {
+  color-scheme: light;
+  --ink: #17211f;
+  --muted: #52615d;
+  --line: #d9e3e0;
+  --mint: #19b8a8;
+  --mint-dark: #087d72;
+  --wash: #f3faf8;
+  --paper: #ffffff;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.65;
+}
+a { color: var(--mint-dark); }
+.shell { width: min(100% - 40px, 860px); margin: 0 auto; }
+header { border-bottom: 1px solid var(--line); background: var(--wash); }
+.brand {
+  display: flex;
+  min-height: 82px;
+  align-items: center;
+  gap: 13px;
+  color: var(--ink);
+  font-size: 21px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.brand img { width: 44px; height: 44px; border-radius: 11px; }
+main { padding: 60px 0 76px; }
+.eyebrow { color: var(--mint-dark); font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+h1 { margin: 10px 0 18px; font-size: clamp(36px, 7vw, 58px); line-height: 1.08; letter-spacing: -.035em; }
+h2 { margin: 42px 0 12px; font-size: 25px; }
+h3 { margin: 22px 0 5px; font-size: 18px; }
+p { margin: 0 0 14px; color: var(--muted); }
+.lead { max-width: 720px; font-size: 19px; }
+.notice {
+  margin: 30px 0;
+  padding: 22px 24px;
+  border: 1px solid #a9ded7;
+  border-radius: 12px;
+  background: var(--wash);
+}
+.notice strong { display: block; margin-bottom: 4px; color: var(--mint-dark); font-size: 18px; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 26px; }
+.card { padding: 22px; border: 1px solid var(--line); border-radius: 12px; }
+.card h3 { margin-top: 0; }
+.links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  padding: 0 16px;
+  border: 1px solid var(--mint-dark);
+  border-radius: 8px;
+  color: var(--mint-dark);
+  font-weight: 750;
+  text-decoration: none;
+}
+.button.primary { background: var(--mint-dark); color: white; }
+section + section { margin-top: 44px; padding-top: 38px; border-top: 1px solid var(--line); }
+ul { padding-left: 22px; }
+li + li { margin-top: 8px; }
+footer { padding: 27px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+footer .shell { display: flex; justify-content: space-between; gap: 20px; }
+footer nav { display: flex; gap: 15px; }
+@media (max-width: 620px) {
+  main { padding-top: 42px; }
+  .grid { grid-template-columns: 1fr; }
+  footer .shell { display: block; }
+  footer nav { margin-top: 8px; }
+}

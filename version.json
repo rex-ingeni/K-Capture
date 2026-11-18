@@ -1,8 +1,8 @@
 {
-  "version": "0.3.0",
+  "version": "0.3.2",
   "url": "https://github.com/rex-ingeni/K-Capture/releases/download/v0.3.0/K-Capture-0.3.0.app.zip",
   "dmg": "https://github.com/rex-ingeni/K-Capture/releases/download/v0.3.0/K-Capture-0.3.0.dmg",
   "size": 2601338,
   "sha256": "846781189de0dd074e081a441892dd9acb6d9cdf0785c841ecffb7a9e4d8eccc",
-  "notes": "K-Capture 0.3.0"
+  "notes": "K-Capture 0.3.2 — App Store update"
 }
